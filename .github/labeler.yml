@@ -12,6 +12,8 @@ Docs:
     - .mailmap
     - .readthedocs.yaml
     - '*.md'
+- any:
+  - changed-files:
     - '*.rst'
     - '!CHANGES.rst'
 
@@ -166,6 +168,8 @@ utils:
 - changed-files:
   - any-glob-to-any-file:
     - cextern/expat/**/*
+- any:
+  - changed-files:
     - '**/utils/**/*'
     - '!astropy/utils/iers/**/*'
     - '!docs/utils/iers.rst'
@@ -185,8 +189,8 @@ utils.masked:
     - docs/utils/masked/**/*
 
 visualization:
-- changed-files:
-  - any-glob-to-any-file:
+- any:
+  - changed-files:
     - '**/visualization/**/*'
     - '!**/visualization/wcsaxes/**/*'
 
@@ -199,6 +203,8 @@ wcs:
 - changed-files:
   - any-glob-to-any-file:
     - cextern/wcslib/**/*
+- any:
+  - changed-files:
     - '**/wcs/**/*'
     - '!astropy/wcs/wcsapi/**/*'
     - '!docs/wcs/wcsapi.rst'

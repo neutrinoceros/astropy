@@ -14,8 +14,9 @@ Docs:
     - '*.md'
 - any:
   - changed-files:
-    - '*.rst'
-    - '!CHANGES.rst'
+    - any-glob-to-any-file:
+      - '*.rst'
+      - '!CHANGES.rst'
 
 testing:
 - changed-files:
@@ -170,11 +171,12 @@ utils:
     - cextern/expat/**/*
 - any:
   - changed-files:
-    - '**/utils/**/*'
-    - '!astropy/utils/iers/**/*'
-    - '!docs/utils/iers.rst'
-    - '!astropy/utils/masked/**/*'
-    - '!docs/utils/masked/**/*'
+    - any-glob-to-any-file:
+      - '**/utils/**/*'
+      - '!astropy/utils/iers/**/*'
+      - '!docs/utils/iers.rst'
+      - '!astropy/utils/masked/**/*'
+      - '!docs/utils/masked/**/*'
 
 utils.iers:
 - changed-files:
@@ -191,8 +193,9 @@ utils.masked:
 visualization:
 - any:
   - changed-files:
-    - '**/visualization/**/*'
-    - '!**/visualization/wcsaxes/**/*'
+    - any-glob-to-any-file:
+      - '**/visualization/**/*'
+      - '!**/visualization/wcsaxes/**/*'
 
 visualization.wcsaxes:
 - changed-files:
@@ -205,9 +208,10 @@ wcs:
     - cextern/wcslib/**/*
 - any:
   - changed-files:
-    - '**/wcs/**/*'
-    - '!astropy/wcs/wcsapi/**/*'
-    - '!docs/wcs/wcsapi.rst'
+    - any-glob-to-any-file:
+      - '**/wcs/**/*'
+      - '!astropy/wcs/wcsapi/**/*'
+      - '!docs/wcs/wcsapi.rst'
 
 wcs.wcsapi:
 - changed-files:

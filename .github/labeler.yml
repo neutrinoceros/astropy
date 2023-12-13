@@ -68,7 +68,9 @@ coordinates:
     - '**/coordinates/**/*'
 
 cosmology:
-  - '**/cosmology/**/*'
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/cosmology/**/*'
 
 io.ascii:
 - changed-files:

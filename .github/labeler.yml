@@ -187,8 +187,8 @@ utils.masked:
 visualization:
 - changed-files:
   - any-glob-to-any-file:
-  - '**/visualization/**/*'
-  - '!**/visualization/wcsaxes/**/*'
+    - '**/visualization/**/*'
+    - '!**/visualization/wcsaxes/**/*'
 
 visualization.wcsaxes:
 - changed-files:
@@ -198,10 +198,10 @@ visualization.wcsaxes:
 wcs:
 - changed-files:
   - any-glob-to-any-file:
-  - cextern/wcslib/**/*
-  - '**/wcs/**/*'
-  - '!astropy/wcs/wcsapi/**/*'
-  - '!docs/wcs/wcsapi.rst'
+    - cextern/wcslib/**/*
+    - '**/wcs/**/*'
+    - '!astropy/wcs/wcsapi/**/*'
+    - '!docs/wcs/wcsapi.rst'
 
 wcs.wcsapi:
 - changed-files:

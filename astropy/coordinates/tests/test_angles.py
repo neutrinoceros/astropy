@@ -407,6 +407,14 @@ def test_angle_format_roundtripping():
     assert_allclose(Angle(str(dec)).degree, dec.degree)
 
 
+@pytest.mark.parametrize("unit", ["deg", "rad", "mas"])
+def test_angle_to_string_decimal(unit):
+    # see https://github.com/astropy/astropy/issues/7456
+    a = Angle(3.1, unit)
+    s = a.to_string(unit=unit, decimal=True)
+    assert s == f"{a.value} {unit}"
+
+
 def test_radec():
     """
     Tests creation/operations of Longitude and Latitude objects

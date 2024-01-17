@@ -346,9 +346,8 @@ class Angle(SpecificTypeQuantity):
                     f"'{unit}' can not be represented in sexagesimal notation"
                 )
             func = ("{:g}" if precision is None else f"{{0:0.{precision}f}}").format
-            # Don't add unit by default for decimal.
             # TODO: could we use Quantity.to_string() here?
-            if not (decimal and format is None):
+            if True:  # not (decimal and format is None):
                 unit_string = unit.to_string(format=format)
                 if format == "latex" or format == "latex_inline":
                     # Remove $ and add space in front if unit is not a superscript.

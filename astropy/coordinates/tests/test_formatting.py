@@ -39,21 +39,21 @@ def test_to_string_decimal():
 
     angle1 = Angle(2.0, unit=u.degree)
 
-    assert angle1.to_string(decimal=True, precision=3) == "2.000"
-    assert angle1.to_string(decimal=True, precision=1) == "2.0"
-    assert angle1.to_string(decimal=True, precision=0) == "2"
+    assert angle1.to_string(decimal=True, precision=3) == "2.000 deg"
+    assert angle1.to_string(decimal=True, precision=1) == "2.0 deg"
+    assert angle1.to_string(decimal=True, precision=0) == "2 deg"
 
     angle2 = Angle(3.0, unit=u.hourangle)
 
-    assert angle2.to_string(decimal=True, precision=3) == "3.000"
-    assert angle2.to_string(decimal=True, precision=1) == "3.0"
-    assert angle2.to_string(decimal=True, precision=0) == "3"
+    assert angle2.to_string(decimal=True, precision=3) == "3.000 hourangle"
+    assert angle2.to_string(decimal=True, precision=1) == "3.0 hourangle"
+    assert angle2.to_string(decimal=True, precision=0) == "3 hourangle"
 
     angle3 = Angle(4.0, unit=u.radian)
 
-    assert angle3.to_string(decimal=True, precision=3) == "4.000"
-    assert angle3.to_string(decimal=True, precision=1) == "4.0"
-    assert angle3.to_string(decimal=True, precision=0) == "4"
+    assert angle3.to_string(decimal=True, precision=3) == "4.000 rad"
+    assert angle3.to_string(decimal=True, precision=1) == "4.0 rad"
+    assert angle3.to_string(decimal=True, precision=0) == "4 rad"
 
     with pytest.raises(ValueError, match="sexagesimal notation"):
         angle3.to_string(decimal=True, sep="abc")

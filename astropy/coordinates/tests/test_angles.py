@@ -354,7 +354,7 @@ def test_angle_formatting():
     res = "Angle as rad: 0.0629763 rad"
     assert f"Angle as rad: {angle.to_string(unit=u.radian)}" == res
 
-    res = "Angle as rad decimal: 0.0629763"
+    res = "Angle as rad decimal: 0.0629763 rad"
     assert (
         f"Angle as rad decimal: {angle.to_string(unit=u.radian, decimal=True)}" == res
     )
@@ -368,7 +368,7 @@ def test_angle_formatting():
     assert angle.to_string(pad=True) == "-01d14m04.444404s"
     assert angle.to_string(unit=u.hour) == "-0h04m56.2962936s"
     assert angle2.to_string(unit=u.hour, pad=True) == "-01h14m04.444404s"
-    assert angle.to_string(unit=u.radian, decimal=True) == "-0.0215473"
+    assert angle.to_string(unit=u.radian, decimal=True) == "-0.0215473 rad"
 
     # We should recognize units that are equal but not identical
     assert angle.to_string(unit=u.hour**1) == "-0h04m56.2962936s"

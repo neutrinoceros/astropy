@@ -1,0 +1,32 @@
+name: Check milestone
+
+on:
+  workflow_dispatch:
+  pull_request:
+  milestoned:
+  demilestoned:
+
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Validate Milestone
+      if: github.event_name == 'milestoned'
+      run: exit 0
+
+    - name: Mandate Milestone
+      if: github.event_name == 'demilestoned'
+      run: |
+        echo A milestone is required
+        exit 1
+
+    #- name: Check Milestone
+    #  uses: actions/github-script@v7
+    #  if: github.event_name == 'pull_request'
+    #  with:
+    #    github-token: ${{ secrets.GITHUB_TOKEN }}
+    #    script: |
+    #      ...

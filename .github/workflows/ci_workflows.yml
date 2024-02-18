@@ -59,6 +59,8 @@ jobs:
         apt:
           - language-pack-fr
           - tzdata
+      toxdeps:
+        - tox-uv
       envs: |
         # NOTE: this coverage test is needed for tests and code that
         #       run only with minimal dependencies.

@@ -224,6 +224,7 @@ lint.unfixable = [
     "PT019",   # pytest-fixture-param-without-value
 ]
 "astropy/io/*" = [
+    "PTH",     # all flake8-use-pathlib
     "G001",  # logging-string-format
     "G004",  # logging-f-string
     "PLR0911",  # too-many-return-statements
@@ -296,6 +297,7 @@ lint.unfixable = [
     "C408",
 ]
 "astropy/utils/*" = [
+    "PTH",     # all flake8-use-pathlib
     "N811",  # constant-imported-as-non-constant
     "PLR0911",  # too-many-return-statements
     "PTH",      # all flake8-use-pathlib

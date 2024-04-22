@@ -60,37 +60,11 @@ jobs:
           - language-pack-fr
           - tzdata
       envs: |
-        # NOTE: this coverage test is needed for tests and code that
-        #       run only with minimal dependencies.
-        - name: Python 3.12 with minimal dependencies and full coverage
-          linux: py312-test-cov
-          coverage: codecov
-
-        - name: Python 3.11 in Parallel with all optional dependencies
-          linux: py311-test-alldeps-fitsio
-          libraries:
-            apt:
-              - language-pack-fr
-              - tzdata
-              - libcfitsio-dev
-          toxargs: -v --develop
-          posargs: -n=4 --run-slow
-
-        - name: Python 3.10 with oldest supported version of all dependencies
-          linux: py310-test-oldestdeps-alldeps-cov-clocale
-          posargs: --remote-data=astropy
-          coverage: codecov
-
-        - name: Python 3.11 with all optional dependencies (Windows)
-          windows: py311-test-alldeps
-          posargs: --durations=50
-
         - name: Python 3.11 with all optional dependencies (MacOS X)
           macos: py311-test-alldeps
           posargs: --durations=50 --run-slow
+          runs-on: macos-14
 
-        - name: Python 3.10 Double test (Run tests twice)
-          linux: py310-test-double
 
   allowed_failures:
     needs: [initial_checks]

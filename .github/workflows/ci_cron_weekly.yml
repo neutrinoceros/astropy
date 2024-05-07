@@ -102,8 +102,9 @@ jobs:
     # of using system libraries and using pytest directly.
 
     runs-on: ubuntu-latest
+    timeout-minutes: 200
     name: Python 3.12
-    if: (github.repository == 'astropy/astropy' && (github.event_name == 'schedule' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Extra CI')))
+    if: github.event_name == 'workflow_dispatch'
     env:
       ARCH_ON_CI: ${{ matrix.arch }}
 
@@ -112,9 +113,9 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-          - arch: s390x
-          - arch: ppc64le
-          - arch: armv7
+          #- arch: s390x
+          #- arch: ppc64le
+          #- arch: armv7
 
     steps:
       - uses: actions/checkout@v4

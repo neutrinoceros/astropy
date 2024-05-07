@@ -102,7 +102,7 @@ jobs:
     # of using system libraries and using pytest directly.
 
     runs-on: ubuntu-latest
-    timeout-minutes: 200
+    timeout-minutes: 420
     name: Python 3.12
     if: github.event_name == 'workflow_dispatch'
     env:
@@ -167,8 +167,4 @@ jobs:
             pip install -U --no-build-isolation pyerfa
             ASTROPY_USE_SYSTEM_ALL=1 pip3 install -v --no-build-isolation -e .[test]
             pip3 list
-            python3 -m pytest \
-              astropy/uncertainty \
-              astropy/units \
-              astropy/utils \
-              astropy/wcs
+            python3 -m pytest

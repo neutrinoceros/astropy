@@ -40,6 +40,7 @@ keywords = [
 ]
 dependencies = [
     "numpy>=1.23",
+    "numpy<2 ; ; platform_system!='Windows'",
     "pyerfa>=2.0.1.1",
     "astropy-iers-data>=0.2024.5.27.0.30.8",
     "PyYAML>=3.13",
@@ -84,7 +85,7 @@ all = [
     "jplephem",
     "mpmath",
     "asdf-astropy>=0.3",
-    "bottleneck>=1.4.0rc5 ; platform_system!='Windows'",
+    "bottleneck>=1.4.0rc5",
     "fsspec[http]>=2023.4.0",
     "s3fs>=2023.4.0",
 ]

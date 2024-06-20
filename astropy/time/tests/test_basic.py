@@ -5,6 +5,7 @@ import datetime
 import functools
 import gc
 import os
+import sys
 from copy import deepcopy
 from decimal import Decimal, localcontext
 from io import StringIO
@@ -2595,8 +2596,15 @@ def test_write_every_format_to_ecsv(fmt):
     t.write(out, format="ascii.ecsv")
     t2 = Table.read(out.getvalue(), format="ascii.ecsv")
     assert t["a"].format == t2["a"].format
-    # Some loss of precision in the serialization
-    assert not np.all(t["a"] == t2["a"])
+    if sys.version_info < (3, 13):
+        # Some loss of precision in the serialization
+        assert not np.all(t["a"] == t2["a"])
+    else:
+        # On 3.13.0b2, first tests indicate that loss
+        # of precision is not guaranteed.
+        # If this starts failing on later pre-releases or on 3.13.0 (final)
+        # we can just collapse back this if/else branching
+        assert np.all(t["a"] == t2["a"])
     # But no loss in the format representation
     assert np.all(t["a"].value == t2["a"].value)
 

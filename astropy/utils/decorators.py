@@ -7,8 +7,12 @@ import textwrap
 import threading
 import types
 import warnings
-from inspect import signature
+from collections.abc import Callable
+from functools import partial, update_wrapper
+from inspect import Signature, signature
+from typing import Any, TypeVar, overload
 
+from ._future_positional_only import wrap as fpo_wrap
 from .exceptions import (
     AstropyDeprecationWarning,
     AstropyPendingDeprecationWarning,
@@ -21,6 +25,7 @@ __all__ = [
     "deprecated_attribute",
     "deprecated_renamed_argument",
     "format_doc",
+    "future_positional_only",
     "lazyproperty",
     "sharedmethod",
 ]
@@ -605,6 +610,32 @@ def deprecated_renamed_argument(
         return wrapper
 
     return decorator
+
+
+F = TypeVar("F", bound=Callable[..., Any])
+
+
+@overload
+def future_positional_only(func: None, /, *names: str) -> Callable[[F], F]: ...
+
+
+@overload
+def future_positional_only(func: F, /, *names: str) -> F: ...
+
+
+def future_positional_only(
+    func: F | None = None, /, *, names: tuple[str, ...] = ()
+) -> Any:
+    if func is None:
+        return partial(future_positional_only, names=names)
+
+    if not callable(func):
+        raise TypeError("not a callable")
+
+    sig = Signature.from_callable(func)
+    wrapper = fpo_wrap(func, names, sig)
+    update_wrapper(wrapper, func)
+    return wrapper
 
 
 # TODO: This can still be made to work for setters by implementing an

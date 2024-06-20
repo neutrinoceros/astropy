@@ -12,5 +12,10 @@ def get_extensions():
         Extension(
             "astropy.utils._compiler",
             [relpath(join(ASTROPY_UTILS_ROOT, "src", "compiler.c"))],
-        )
+        ),
+        Extension(
+            "astropy.utils._future_positional_only",
+            [relpath(join(ASTROPY_UTILS_ROOT, "src", "_future_positional_only.c"))],
+            extra_compile_args=["-Werror", "-Wall"],
+        ),
     ]

@@ -65,6 +65,13 @@ jobs:
             python: '3.12'
             toxenv: py312-test-alldeps
 
+          # Keep noscipy factor until scipy has nightly cp313 wheels
+          # https://github.com/scipy/scipy/issues/20992
+          - name: Python 3.13-dev with minimal deps
+            os: ubuntu-latest
+            python: '3.13-dev'
+            toxenv: py313-test-devdeps-noscipy
+
           - name: Documentation link check
             os: ubuntu-latest
             python: '3.x'

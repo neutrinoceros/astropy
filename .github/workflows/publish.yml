@@ -51,7 +51,7 @@ jobs:
         CIBW_BEFORE_BUILD:       '${{ ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Build all wheels')) && 'pip install setuptools setuptools_scm cython numpy extension-helpers') || '' }}'
         CIBW_BUILD_FRONTEND:     '${{ ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Build all wheels')) && 'pip; args: --no-build-isolation') || 'build' }}'
         CIBW_PRERELEASE_PYTHONS: '${{ ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'Build all wheels'))) }}'
-
+        CIBW_FREE_THREADED_SUPPORT: true
 
       test_extras: test
       # FIXME: we exclude the test_data_out_of_range test since it

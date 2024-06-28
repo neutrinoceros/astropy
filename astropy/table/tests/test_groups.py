@@ -636,9 +636,7 @@ def test_column_filter():
     """
 
     def all_positive(column):
-        if np.any(column < 0):
-            return False
-        return True
+        return not np.any(column < 0)
 
     # Negative value in 'a' column should not filter because it is a key col
     t = Table.read(

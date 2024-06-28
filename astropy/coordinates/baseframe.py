@@ -274,7 +274,7 @@ class BaseCoordinateFrame(ShapedLikeNDArray):
                 frame_attrs.update(basecls.frame_attributes)
 
         frame_attrs |= {
-            k: v for k, v in cls.__dict__.items() if isinstance(v, Attribute)
+            k: v for k, v in vars(cls).items() if isinstance(v, Attribute)
         }
 
         cls.frame_attributes = frame_attrs

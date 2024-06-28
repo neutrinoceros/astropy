@@ -411,7 +411,7 @@ class LinearLSQFitter(metaclass=_FitterMeta):
         """Check if inverse of matrix can be obtained."""
         if m.shape[0] != m.shape[1]:
             return False
-        return not np.linalg.matrix_rank(m) < m.shape[0]
+        return np.linalg.matrix_rank(m) >= m.shape[0]
 
     def _add_fitting_uncertainties(self, model, a, n_coeff, x, y, z=None, resids=None):
         """

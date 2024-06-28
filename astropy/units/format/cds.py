@@ -68,7 +68,7 @@ class CDS(Base):
         from astropy import units as u
         from astropy.units import cds
 
-        return {k: v for k, v in cds.__dict__.items() if isinstance(v, u.UnitBase)}
+        return {k: v for k, v in vars(cds).items() if isinstance(v, u.UnitBase)}
 
     @classproperty(lazy=True)
     def _lexer(cls) -> Lexer:

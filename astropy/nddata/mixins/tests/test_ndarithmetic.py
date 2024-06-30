@@ -1181,7 +1181,7 @@ def test_arithmetics_meta_func():
 
 def test_arithmetics_wcs_func():
     def wcs_comp_func(wcs1, wcs2, tolerance=0.1):
-        return tolerance >= 0.01
+        return bool(tolerance >= 0.01)
 
     meta1 = {"a": 1}
     meta2 = {"a": 3, "b": 2}

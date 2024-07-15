@@ -1636,15 +1636,18 @@ class TimeString(TimeUnique):
             chars = val1.view((_parse_times.dt_u1, val1.dtype.itemsize))
 
         # Call the fast parsing ufunc.
-        print(f"{chars=}")
-        print(f"{val1.dtype=}")
-        print(f"{val1.dtype.kind=}")
-        print(f"{_parse_times.dt_u1=}")
-        if val1.dtype.kind == "U":
-            print(f"{val1_uint32=}")
-        print(f"{val1.dtype.itemsize}")
+        try:
+            time_struct = self._fast_parser(chars)
+        except Exception:
+            print(f"{chars=}")
+            print(f"{val1.dtype=}")
+            print(f"{val1.dtype.kind=}")
+            print(f"{_parse_times.dt_u1=}")
+            if val1.dtype.kind == "U":
+                print(f"{val1_uint32=}")
+            print(f"{val1.dtype.itemsize}")
+            raise
 
-        time_struct = self._fast_parser(chars)
         jd1, jd2 = erfa.dtf2d(
             self.scale.upper().encode("ascii"),
             time_struct["year"],

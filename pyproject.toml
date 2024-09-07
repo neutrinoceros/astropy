@@ -132,6 +132,7 @@ dev = [
 ]
 dev_all = [
     "tox",
+    "tox-uv>=1.11.2",
     "astropy[dev]",
     "astropy[test_all]",
 ]

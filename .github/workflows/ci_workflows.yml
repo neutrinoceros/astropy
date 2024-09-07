@@ -64,6 +64,7 @@ jobs:
         #       run only with minimal dependencies.
         - name: Python 3.12 with minimal dependencies and full coverage
           linux: py312-test-cov
+          toxdeps: tox-uv
           coverage: codecov
 
         - name: Python 3.12 in Parallel with all optional dependencies
@@ -73,24 +74,29 @@ jobs:
               - language-pack-fr
               - tzdata
               - libcfitsio-dev
+          toxdeps: tox-uv
           toxargs: -v --develop
           posargs: -n=4 --run-slow
 
         - name: Python 3.11 with oldest supported version of all dependencies
           linux: py311-test-oldestdeps-alldeps-cov-clocale
+          toxdeps: tox-uv
           posargs: --remote-data=astropy
           coverage: codecov
 
         - name: Python 3.12 with all optional dependencies (Windows)
           windows: py312-test-alldeps
+          toxdeps: tox-uv
           posargs: --durations=50
 
         - name: Python 3.12 with all optional dependencies (MacOS X)
           macos: py312-test-alldeps
+          toxdeps: tox-uv
           posargs: --durations=50 --run-slow
           runs-on: macos-latest
 
         - name: Python 3.11 Double test (Run tests twice)
+          toxdeps: tox-uv
           linux: py311-test-double
 
   allowed_failures:
@@ -109,4 +115,5 @@ jobs:
       envs: |
         - name: (Allowed Failure) Python 3.12 with remote data and dev version of key dependencies
           linux: py312-test-devdeps
+          toxdeps: tox-uv
           posargs: --remote-data=any --verbose

@@ -8,6 +8,7 @@ on:
     tags:
     - '*'
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -138,17 +139,23 @@ jobs:
   test_wheel_building:
     needs: [initial_checks]
     # This ensures that a couple of wheel targets work fine in pull requests and pushes
+    runs-on: ubuntu-latest
     permissions:
       contents: none
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@d9b81a07e789d1b1921ab5fe33de2ddcbbd02c3f  # v2.3.0
-    with:
-      upload_to_pypi: false
-      upload_to_anaconda: false
-      test_extras: test
-      test_command: pytest -p no:warnings --astropy-header -m "not hypothesis" -k "not test_data_out_of_range and not test_set_locale and not TestQuantityTyping" --pyargs astropy
-      targets: |
-        - cp311-manylinux_x86_64
+    steps:
+      - uses: neutrinoceros/github-actions-workflows/.github/workflows/publish.yml@395e2193eb984aa294a4004f1da9568c15faa221
+        id: publish
+        with:
+          upload_to_pypi: false
+          upload_to_anaconda: false
+          test_extras: test
+          test_command: pytest -p no:warnings --astropy-header -m "not hypothesis" -k "not test_data_out_of_range and not test_set_locale and not TestQuantityTyping" --pyargs astropy
+          targets: |
+            - cp311-manylinux_x86_64
 
+      - run: echo ${STEPS_PUBLISH_OUTPUTS_CIBW_SUMMARY} >> "$GITHUB_STEP_SUMMARY"
+        env:
+          STEPS_PUBLISH_OUTPUTS_CIBW_SUMMARY: ${{ steps.publish.outputs.cibw_summary }}
 
   test_limited_api_build:
     # Test to make sure that we can build astropy with the limited API

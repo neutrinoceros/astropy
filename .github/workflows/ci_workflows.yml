@@ -137,7 +137,7 @@ jobs:
           linux: stubtest
 
   test_wheel_building:
-    needs: [initial_checks]
+    #needs: [initial_checks]
     # This ensures that a couple of wheel targets work fine in pull requests and pushes
     runs-on: ubuntu-latest
     permissions:

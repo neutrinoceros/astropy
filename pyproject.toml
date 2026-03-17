@@ -10,7 +10,7 @@ authors = [
 ]
 license = "BSD-3-Clause"
 license-files = ["LICENSE.rst", "licenses/*.rst"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
@@ -185,6 +185,15 @@ requires = ["setuptools>=77.0.0",
 build-backend = "setuptools.build_meta"
 
 [dependency-groups]
+# duplicate build-system.requires
+build = [
+    "extension-helpers",
+    "setuptools",
+    "setuptools_scm",
+    "cython",
+    "numpy",
+    "pyerfa",
+]
 # a dev-only set of *tested* import/export target dataframe implementations
 # that can be converted to and from via narwhals
 dataframe = [
@@ -734,13 +743,13 @@ ignore-words-list = """
 """
 
 [tool.uv]
+no-build-isolation-package = ["astropy"]
 # never build the following packages from source. Prefer more recent versions
 # with binary distributions even with --resolution=lowest[-direct]
 no-build-package = [
     "bottleneck",
     "coverage",
     "h5py",
-    "numpy",
     "pandas",
     "polars",
     "requests",
@@ -858,3 +867,7 @@ constraint-dependencies = [
     # see https://github.com/astropy/astropy/issues/18292
     "array-api-strict<2.4 ; python_version<'3.12'",
 ]
+
+[tool.uv.sources]
+extension-helpers = { git = "https://github.com/neutrinoceros/extension-helpers", branch = "enh/pep803" }
+numpy = { git = "https://github.com/kumaraditya303/numpy", branch = "opaque" }

@@ -41,8 +41,6 @@ jobs:
 
     - name: Commit changes
       run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
         BRANCH_NAME=update-astropy-iers-data-pin-$(date +"%s")
         git switch -c "$BRANCH_NAME"
         git add pyproject.toml scripts/lowest-resolved-tree.txt

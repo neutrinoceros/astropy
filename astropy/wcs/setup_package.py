@@ -256,7 +256,7 @@ def get_wcslib_cfg(cfg, wcslib_files, include_paths):
 
 
 def get_extensions():
-    generate_c_docstrings()
+    # generate_c_docstrings()
 
     ######################################################################
     # DISTUTILS SETUP

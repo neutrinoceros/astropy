@@ -13,7 +13,6 @@
 #include "astropy_wcs/wcslib_wtbarr_wrap.h"
 #include "astropy_wcs/distortion_wrap.h"
 #include "astropy_wcs/sip_wrap.h"
-#include "astropy_wcs/docstrings.h"
 #include "astropy_wcs/astropy_wcs_api.h"
 #include "astropy_wcs/unit_list_proxy.h"
 

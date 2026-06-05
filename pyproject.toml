@@ -1,5 +1,5 @@
 [project]
-name = "astropy"
+name = "astropy-core"
 dynamic = [
     "version"
 ]

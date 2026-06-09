@@ -766,26 +766,26 @@ _sanity_check(
  */
 
 static PyGetSetDef Wcs_getset[] = {
-  {"det2im1", (getter)Wcs_get_det2im1, (setter)Wcs_set_det2im1, (char *)doc_det2im1},
-  {"det2im2", (getter)Wcs_get_det2im2, (setter)Wcs_set_det2im2, (char *)doc_det2im2},
-  {"cpdis1", (getter)Wcs_get_cpdis1, (setter)Wcs_set_cpdis1, (char *)doc_cpdis1},
-  {"cpdis2", (getter)Wcs_get_cpdis2, (setter)Wcs_set_cpdis2, (char *)doc_cpdis2},
-  {"sip", (getter)Wcs_get_sip, (setter)Wcs_set_sip, (char *)doc_sip},
-  {"wcs", (getter)Wcs_get_wcs, (setter)Wcs_set_wcs, (char *)doc_wcs},
+  {"det2im1", (getter)Wcs_get_det2im1, (setter)Wcs_set_det2im1, NULL},
+  {"det2im2", (getter)Wcs_get_det2im2, (setter)Wcs_set_det2im2, NULL},
+  {"cpdis1", (getter)Wcs_get_cpdis1, (setter)Wcs_set_cpdis1, NULL},
+  {"cpdis2", (getter)Wcs_get_cpdis2, (setter)Wcs_set_cpdis2, NULL},
+  {"sip", (getter)Wcs_get_sip, (setter)Wcs_set_sip, NULL},
+  {"wcs", (getter)Wcs_get_wcs, (setter)Wcs_set_wcs, NULL},
   {NULL}
 };
 
 static PyMethodDef Wcs_methods[] = {
-  {"_all_pix2world", (PyCFunction)Wcs_all_pix2world, METH_VARARGS|METH_KEYWORDS, doc_all_pix2world},
-  {"_det2im", (PyCFunction)Wcs_det2im, METH_VARARGS|METH_KEYWORDS, doc_det2im},
-  {"_p4_pix2foc", (PyCFunction)Wcs_p4_pix2foc, METH_VARARGS|METH_KEYWORDS, doc_p4_pix2foc},
-  {"_pix2foc", (PyCFunction)Wcs_pix2foc, METH_VARARGS|METH_KEYWORDS, doc_pix2foc},
+  {"_all_pix2world", (PyCFunction)Wcs_all_pix2world, METH_VARARGS|METH_KEYWORDS, NULL},
+  {"_det2im", (PyCFunction)Wcs_det2im, METH_VARARGS|METH_KEYWORDS, NULL},
+  {"_p4_pix2foc", (PyCFunction)Wcs_p4_pix2foc, METH_VARARGS|METH_KEYWORDS, NULL},
+  {"_pix2foc", (PyCFunction)Wcs_pix2foc, METH_VARARGS|METH_KEYWORDS, NULL},
   {NULL}
 };
 
 static PyMethodDef module_methods[] = {
   {"_sanity_check", (PyCFunction)_sanity_check, METH_NOARGS, ""},
-  {"find_all_wcs", (PyCFunction)Wcsprm_find_all_wcs, METH_VARARGS|METH_KEYWORDS, doc_find_all_wcs},
+  {"find_all_wcs", (PyCFunction)Wcsprm_find_all_wcs, METH_VARARGS|METH_KEYWORDS, NULL},
   {"set_wtbarr_fitsio_callback", (PyCFunction)Wcsprm_set_wtbarr_fitsio_callback, METH_VARARGS, NULL},
   {NULL}  /* Sentinel */
 };
@@ -797,7 +797,7 @@ static PyType_Spec WcsType_spec = {
   .flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE | Py_TPFLAGS_HAVE_GC | Py_TPFLAGS_IMMUTABLETYPE,
   .slots = (PyType_Slot[]){
     {Py_tp_dealloc, (destructor)Wcs_dealloc},
-    {Py_tp_doc, doc_Wcs},
+    {Py_tp_doc, NULL},
     {Py_tp_traverse, (traverseproc)Wcs_traverse},
     {Py_tp_clear, (inquiry)Wcs_clear},
     {Py_tp_methods, Wcs_methods},

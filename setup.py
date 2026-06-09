@@ -4,8 +4,6 @@
 # NOTE: The configuration for the package, including the name, version, and
 # other information are set in the pyproject.toml file.
 
-import sys
-from pathlib import Path
 
 from setuptools import setup
 from setuptools.command.editable_wheel import editable_wheel
@@ -17,14 +15,17 @@ ext_modules = get_extensions()
 
 
 def install_stubs(build_lib, output_dir):
-    sys.path.insert(0, build_lib)
-    try:
-        from astropy.units.typing_utils import create_stubs  # noqa: PLC0415
+    pass
 
-        create_stubs(Path(output_dir))
-    finally:
-        # Undo the path modification.
-        sys.path.pop(0)
+
+# sys.path.insert(0, build_lib)
+# try:
+#      from astropy.units.typing_utils import create_stubs
+
+#      create_stubs(Path(output_dir))
+# finally:
+#       Undo the path modification.
+#       sys.path.pop(0)
 
 
 class InstallWithStubs(install):
@@ -32,7 +33,8 @@ class InstallWithStubs(install):
 
     def run(self):
         super().run()
-        install_stubs(self.build_lib, self.root)
+
+    #   install_stubs(self.build_lib, self.root)
 
 
 class EditableInstallWithStubs(editable_wheel):
@@ -40,7 +42,8 @@ class EditableInstallWithStubs(editable_wheel):
 
     def run(self):
         super().run()
-        install_stubs(self.project_dir, self.project_dir)
+
+    #  install_stubs(self.project_dir, self.project_dir)
 
 
 # Specify the minimum version for the Numpy C-API

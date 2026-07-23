@@ -75,8 +75,6 @@ jobs:
             python: '3.14t'
             toxenv: py314t-test-recdeps
             PYTHON_GIL: 0
-            # https://github.com/astropy/astropy/issues/19205
-            PYTHON_CONTEXT_AWARE_WARNINGS: 0
 
           - name: Documentation link check
             os: ubuntu-latest
@@ -86,12 +84,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
       with:
         persist-credentials: false
         fetch-depth: 0
     - name: Set up Python
-      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+      uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6.3.0
       with:
         python-version: ${{ matrix.python }}
     - name: Install language-pack-de and tzdata
@@ -108,7 +106,6 @@ jobs:
       run: tox ${{ matrix.toxargs}} -e ${{ matrix.toxenv}} -- ${{ matrix.toxposargs}}
       env:
         PYTHON_GIL: ${{ matrix.PYTHON_GIL }}
-        PYTHON_CONTEXT_AWARE_WARNINGS: ${{ matrix.PYTHON_CONTEXT_AWARE_WARNINGS }}
 
 
   tests_more_architectures:
@@ -141,7 +138,7 @@ jobs:
           - arch: armv7
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -156,6 +153,9 @@ jobs:
           env: |
             ARCH_ON_CI: ${{ env.ARCH_ON_CI }}
             IS_CRON: ${{ env.IS_CRON }}
+            # Exported for the whole run, not just the build, so that the
+            # tests that need the bundled WCSLIB headers know to skip.
+            ASTROPY_USE_SYSTEM_ALL: 1
 
           install: |
             apt-get update -q -y
@@ -189,7 +189,7 @@ jobs:
             # cython and pyerfa versions in ubuntu repos are too old currently
             pip install -U cython setuptools packaging
             pip install -U --no-build-isolation pyerfa
-            ASTROPY_USE_SYSTEM_ALL=1 pip install -v --no-build-isolation -e .[test]
+            pip install -v --no-build-isolation -e .[test]
             pip list
             # A fresh CI runner has no ~/.astropy directory, but developer
             # machines usually do. Create empty cache and config directories

@@ -70,7 +70,7 @@ jobs:
 
   tests:
     needs: [initial_checks]
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@e5af21e4ae37af089a73bb032e10b78b0e746174  # v3.0.1
+    uses: neutrinoceros/github-actions-workflows/.github/workflows/tox.yml@f1843c7f726165f693b199ebbe7edb2d69feb529  # https://github.com/OpenAstronomy/github-actions-workflows/pull/410
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     with:
@@ -137,7 +137,7 @@ jobs:
 
   allowed_failures:
     needs: [initial_checks]
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@e5af21e4ae37af089a73bb032e10b78b0e746174  # v3.0.1
+    uses: neutrinoceros/github-actions-workflows/.github/workflows/tox.yml@f1843c7f726165f693b199ebbe7edb2d69feb529  # https://github.com/OpenAstronomy/github-actions-workflows/pull/410
     with:
       setenv: |
         ARCH_ON_CI: "normal"
@@ -156,7 +156,7 @@ jobs:
 
   stub_tests:
     needs: [initial_checks]
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@e5af21e4ae37af089a73bb032e10b78b0e746174  # v3.0.1
+    uses: neutrinoceros/github-actions-workflows/.github/workflows/tox.yml@f1843c7f726165f693b199ebbe7edb2d69feb529  # https://github.com/OpenAstronomy/github-actions-workflows/pull/410
     with:
       setenv: |
         ARCH_ON_CI: "normal"
@@ -175,7 +175,7 @@ jobs:
     # This ensures that a couple of wheel targets work fine in pull requests and pushes
     permissions:
       contents: none
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@e5af21e4ae37af089a73bb032e10b78b0e746174  # v3.0.1
+    uses: neutrinoceros/github-actions-workflows/.github/workflows/publish.yml@f1843c7f726165f693b199ebbe7edb2d69feb529  # https://github.com/OpenAstronomy/github-actions-workflows/pull/410
     with:
       upload_to_pypi: false
       upload_to_anaconda: false

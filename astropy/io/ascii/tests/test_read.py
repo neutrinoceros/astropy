@@ -61,7 +61,11 @@ def test_convert_overflow(fast_reader):
     """
     expected_kind = "U"
     with pytest.warns(
-        AstropyWarning, match="OverflowError converting to IntType in column a"
+        AstropyWarning,
+        match=(
+            r"^OverflowError converting to Integer in column a, "
+            r"reverting to String$"
+        ),
     ):
         dat = ascii.read(
             ["a", "1" * 10000], format="basic", fast_reader=fast_reader, guess=False

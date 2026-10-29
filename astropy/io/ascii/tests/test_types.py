@@ -41,15 +41,15 @@ def test_ipac_read_types():
 """
     reader = ascii.get_reader(reader_cls=ascii.Ipac)
     reader.read(table)
-    types = [
-        ascii.FloatType,
-        ascii.FloatType,
-        ascii.IntType,
-        ascii.FloatType,
-        ascii.StrType,
+    kinds = [
+        ascii.ColumnType.FLOAT,
+        ascii.ColumnType.FLOAT,
+        ascii.ColumnType.INTEGER,
+        ascii.ColumnType.FLOAT,
+        ascii.ColumnType.STRING,
     ]
-    for col, expected_type in zip(reader.cols, types):
-        assert col.type == expected_type
+    for col, expected_kind in zip(reader.cols, kinds, strict=True):
+        assert col.type == expected_kind
 
 
 def test_ipac_read_long_columns():

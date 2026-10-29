@@ -1234,7 +1234,7 @@ def test_data_out_of_range(fast_reader, guess):
     if fast_reader:  # Assert precision warnings for cols 2-5
         assert len(w) == 4
         for i in range(len(w)):
-            assert f"OverflowError converting to FloatType in column col{i + 2}" in str(
+            assert f"OverflowError converting to Float in column col{i + 2}" in str(
                 w[i].message
             )
     read_values = np.array([col[0] for col in t.itercols()])
@@ -1266,7 +1266,7 @@ def test_data_out_of_range(fast_reader, guess):
         else:
             assert len(w) == 3
         for i in range(len(w)):
-            assert f"OverflowError converting to FloatType in column col{i + 4}" in str(
+            assert f"OverflowError converting to Float in column col{i + 4}" in str(
                 w[i].message
             )
     read_values = np.array([col[0] for col in t.itercols()])
@@ -1377,7 +1377,7 @@ def test_data_at_range_limit(fast_reader, guess):
     if not isinstance(ctx, nullcontext):
         assert len(w) == 1, f"Expected 1 warning, found {len(w)}"
         assert (
-            "OverflowError converting to FloatType in column col1, possibly "
+            "OverflowError converting to Float in column col1, possibly "
             "resulting in degraded precision" in str(w[0].message)
         )
 
@@ -1425,15 +1425,19 @@ def test_int_out_of_order(guess):
 
     with pytest.warns(
         AstropyWarning,
-        match=r"OverflowError converting to "
-        r"IntType in column B, reverting to String",
+        match=(
+            r"OverflowError converting to Integer in column B, "
+            r"reverting to String"
+        ),
     ):
         table = ascii.read(text, format="basic", guess=guess, fast_reader=True)
     assert_table_equal(table, expected)
     with pytest.warns(
         AstropyWarning,
-        match=r"OverflowError converting to "
-        r"IntType in column B, reverting to String",
+        match=(
+            r"OverflowError converting to Integer in column B, "
+            r"reverting to String"
+        ),
     ):
         table = ascii.read(text, format="basic", guess=guess, fast_reader=False)
     assert_table_equal(table, expected)
